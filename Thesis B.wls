@@ -62,12 +62,12 @@ DJ[m_][n_,t_]:= r[n-1] DJ[m-1][n-1, t]- r[n] DJ[m-1][n+1, t];
 
 The parameter p represents the order of the differential equation.
 *)
-p = 3;
+p = 2;
 \[Omega] = 2;
-f[t_]=t^2;
+f[t_]=0;
 (*L[x_, t_] = x''[t]-t x[t];*)
-(*L[x_, t_] = t^2 x''[t] + t x'[t] + (t^2 - 1) x[t];*)
-L[x_, t_] =t^3x'''[t]-t^2x''[t]-t x'[t]+x[t];
+L[x_, t_] = t^2 x''[t] + t x'[t] + (t^2 - 1) x[t];
+(*L[x_, t_] =t^3x'''[t]-t^2x''[t]-t x'[t]+x[t];*)
 (*L[x_, t_] =x''[t]+\[Omega]^2 x[t];*)
 
 (* The differential operator L evaluated on J[n,t].
@@ -75,8 +75,8 @@ L[x_, t_] =t^3x'''[t]-t^2x''[t]-t x'[t]+x[t];
 We need to specify this separately because we need Mathematica to differentiate J using our function DJ defined above. 
 *)
 (*LJ[n_][t_] = DJ[2][n, t] - t J[n][t];*)
-(*LJ[n_][t_] = t^2 DJ[2][n, t] + t DJ[1][n, t] + (t^2 - 1) J[n][t];*)
-LJ[n_][t_] = t^3DJ[3][n,t]-t^2DJ[2][n,t]-t DJ[1][n,t]+J[n][t];
+LJ[n_][t_] = t^2 DJ[2][n, t] + t DJ[1][n, t] + (t^2 - 1) J[n][t];
+(*LJ[n_][t_] = t^3DJ[3][n,t]-t^2DJ[2][n,t]-t DJ[1][n,t]+J[n][t];*)
 (*LJ[n_][t_] = DJ[2][n,t]+\[Omega]^2 J[n][t];*)
 
 (* Initial conditions for the differential equation.
@@ -89,8 +89,8 @@ T[[1]]=0;
 c[[1]]=0;
 T[[2]]=1;
 c[[2]]=1;
-T[[3]]=1;
-c[[3]]=1;
+(*T[[3]]=1;
+c[[3]]=1;*)
 Dx[m_][t_]=D[x[t], {t,m}];
 ICs = Table[Dx[i-1][T[[i]]]== c[[i]], {i, 1, p}];
 
